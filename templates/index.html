@@ -18,6 +18,18 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js" crossorigin="anonymous"></script>
-<script></script>
+<script>
+    $("textarea").on('input', function () {
+        // Check if it's the actual textarea
+        // Ignore if it's just showdown itself
+        if (this.id.slice(this.id.length - 8) !== "-showdown") {
+            const text = $(this).val(),
+                target = document.getElementById(this.id.toString().concat("-showdown")),
+                converter = new showdown.Converter(),
+                html = converter.makeHtml(text);
+            target.innerHTML = html
+        }
+    })
+</script>
 </body>
 </html>

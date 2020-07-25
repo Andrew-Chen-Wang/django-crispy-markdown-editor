@@ -1,3 +1,3 @@
 <textarea name="{{ widget.name }}"{% include "django/forms/widgets/attrs.html" %}>
 {% if widget.value %}{{ widget.value }}{% endif %}</textarea>
-<textarea {% if widget.col %}{{ widget.col }}{% endif %}></textarea>
+<div name="{{ widget.name }}-showdown"{% for name, value in widget.attrs.items %}{% if value is not False %} {{ name }}{% if value is not True %}="{% if name == "id" %}{{ value|stringformat:'s' }}-showdown{% else %}{{ value|stringformat:'s' }}{% endif %}"{% endif %}{% endif %}{% endfor %}></textarea>
